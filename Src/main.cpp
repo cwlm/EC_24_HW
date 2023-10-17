@@ -9,7 +9,7 @@
 int main() {
     RobotPos pos{0,0,0,0};
     moveRobot(&pos, 1, 20000);
-    std::cout << pos.x << pos.y << std::endl;
+    std::cout << pos.x << std::endl << pos.y << std::endl;
 
     return 0;
 }
