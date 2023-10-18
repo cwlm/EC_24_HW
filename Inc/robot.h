@@ -31,5 +31,6 @@ struct RobotHP{
     int max_hp;
 };
 
+RobotHP* hitRobot(RobotHP* hpDef, RobotPos *posAtk, RobotPos *posDef);
 
 #endif //HW1_ROBOT_H

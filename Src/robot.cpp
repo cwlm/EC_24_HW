@@ -9,3 +9,8 @@ RobotPos* moveRobot(RobotPos *pos, float dx, float dy){
     pos->y = pos->y + dy;
     return pos;
 }
+
+RobotHP *hitRobot(RobotHP *hpDef, RobotPos *posAtk, RobotPos *posDef) {
+    hpDef->hp = hpDef->max_hp;
+    return hpDef;
+}
