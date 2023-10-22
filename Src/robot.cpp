@@ -3,14 +3,17 @@
 //
 
 #include "../Inc/robot.h"
+#include <cmath>
 
-RobotPos* moveRobot(RobotPos *pos, float dx, float dy){
-    pos->x = pos->x + dx;
-    pos->y = pos->y + dy;
-    return pos;
+Robot *moveRobot(Robot *robot, float dx, float dy) {
+    robot->pos.x += dx;
+    robot->pos.y += dx;
+    return robot;
 }
 
-RobotHP *hitRobot(RobotHP *hpDef, RobotPos *posAtk, RobotPos *posDef) {
-    hpDef->hp = hpDef->max_hp;
-    return hpDef;
+Robot *hitRobot(Robot *def, Robot *atk) {
+    float distance = sqrtf(powf(def->pos.x - atk->pos.x, 2) + powf(def->pos.y - atk->pos.y, 2));
+
+    def->hp.current_hp = def->hp.max_hp;
+    return def;
 }
