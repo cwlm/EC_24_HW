@@ -30,6 +30,7 @@ struct RobotHP{
 };
 
 struct Robot {
+    char name[2];
     struct RobotPos pos;
     struct RobotHP hp;
 };
