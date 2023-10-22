@@ -13,20 +13,22 @@ int main() {
 
     for (int i = 0; i < 5; i++) {
         a[i].name[0] = 'a';
-        a[i].name[1] = '0' + i;
+        a[i].name[1] = (char) ((int) '0' + i);
+        a[i].name[2] = '\0';
         a[i].pos.x = 0;
         a[i].pos.y = 0;
-        a[i].pos.yaw = 0;
+        a[i].pos.yaw = 45;
         a[i].pos.pitch = 0;
         a[i].hp.current_hp = 100;
         a[i].hp.max_hp = 100;
     }
     for (int i = 0; i < 5; i++) {
         b[i].name[0] = 'b';
-        b[i].name[1] = '0' + i;
+        b[i].name[1] = (char) ((int) '0' + i);
+        b[i].name[2] = '\0';
         b[i].pos.x = 0;
         b[i].pos.y = 0;
-        b[i].pos.yaw = 0;
+        b[i].pos.yaw = 45;
         b[i].pos.pitch = 0;
         b[i].hp.current_hp = 100;
         b[i].hp.max_hp = 100;

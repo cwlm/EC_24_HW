@@ -15,7 +15,16 @@
 |  B   |    // blue base
 --------
 */
+struct RobotChassis{
+    float maxV;
+    float power;
+};
 
+struct RobotGimbal{
+    float maxAngularV;
+    float power;
+    float heat;
+};
 
 struct RobotPos{
     float x;     // m   set down left as (0,0)
@@ -30,13 +39,17 @@ struct RobotHP{
 };
 
 struct Robot {
-    char name[2];
+    char name[3];
+    int maxP;
+    bool alive;
     struct RobotPos pos;
     struct RobotHP hp;
+    struct RobotChassis chassis;
+    struct RobotGimbal gimbal;
 };
 
-Robot *moveRobot(Robot *robot, float dx, float dy);
+int moveRobot(Robot *robot, float dx, float dy);
 
-Robot *hitRobot(Robot *def, Robot *atk);
+int hitRobot(Robot *def, Robot *atk);
 
 #endif //HW1_ROBOT_H
