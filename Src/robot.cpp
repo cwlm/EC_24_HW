@@ -26,12 +26,12 @@ int moveRobot(Robot *robot, float dx, float dy) {
 // function to attack another robot
 int hitRobot(Robot *def, Robot *atk) {
     if (!def->alive){
-        fprintf(stderr,"Robot %s is already dead!\n", def->name);
+        fprintf(stderr, "Robot %s is already dead!", def->name);
         return 1;
     }
 
     printf("Robot %s tried to hit robot %s.\n", atk->name, def->name);
-    const float vMax = 1;// maximum muzzle velocity
+    const float vMax = 10;// maximum muzzle velocity
 
     // check if succeeded or rule violated
     float distance = sqrtf(powf(def->pos.x - atk->pos.x, 2) + powf(def->pos.y - atk->pos.y, 2));
@@ -42,14 +42,14 @@ int hitRobot(Robot *def, Robot *atk) {
     bool hitSucceed = distance <= (rand() % 1000 + 1) / 100.0;
 
     // handle the result
-    if (exceedVLimit) {
-        printf("Robot %s violates the rule bt exceeding maximum muzzle velocity.\n", atk->name);
+    if (exceedVLimit) {// speed
+        printf("Robot %s violates the rule by exceeding maximum muzzle velocity.\n", atk->name);
         printf("Hp of robot %s reduced by 10, from %d ", atk->name, atk->hp.current_hp);
         reduceHP(atk, 10);
         printf("to %d.\n", atk->hp.current_hp);
     }
 
-    if (hitSucceed) {
+    if (hitSucceed) {// hit
         printf("Succeeded, hp of robot %s reduced from %d ", def->name, def->hp.current_hp);
         def->hp.current_hp = def->hp.current_hp < 10 ? 0 : (def->hp.current_hp - 10);
         printf("to %d.\n", def->hp.current_hp);
@@ -57,8 +57,17 @@ int hitRobot(Robot *def, Robot *atk) {
         printf("Failed, hp of robot %s still %d.\n", def->name, def->hp.current_hp);
     }
 
-    if (atk->gimbal.heat > 200){
+    atk->gimbal.heat += 10;
+    if (atk->gimbal.heat > 200) { // heat
+        printf("Robot %s severely violates the rule by overheating, ", atk->name);
         atk->gimbal.heat = 200;
+        reduceHP(atk, 50);
+        printf("HP reduced to %d.\n", atk->hp.current_hp);
+    } else if (atk->gimbal.heat <= 200 && atk->gimbal.heat > 100) {
+        printf("Robot %s violates the rule by overheating, ", atk->name);
+        reduceHP(atk, 10);
+        printf("HP reduced to %d.\n", atk->hp.current_hp);
     }
+
     return 0;
 }
